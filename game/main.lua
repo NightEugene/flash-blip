@@ -40,7 +40,8 @@ local particles
 local gameCanvas
 local effects
 -- Platform detection: check once at module level
-local isMobile = love.system.getOS() == "Android" or love.system.getOS() == "iOS"
+local isMobile = love.system.getOS() == "Android" or love.system.getOS() == "iOS" or
+                 love.system.getOS() == "AuroraOS"
 
 local function initGame()
   score = 0
