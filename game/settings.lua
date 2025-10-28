@@ -12,4 +12,9 @@ Settings.ASPECT_RATIO = Settings.INTERNAL_WIDTH / Settings.INTERNAL_HEIGHT
 Settings.WINDOW_WIDTH = Settings.INTERNAL_WIDTH
 Settings.WINDOW_HEIGHT = Settings.INTERNAL_HEIGHT
 
+if love.system.getOS() == "AuroraOS" then
+  local coef = love.graphics.getHeight() / love.graphics.getWidth()
+  Settings.INTERNAL_HEIGHT = Settings.INTERNAL_WIDTH * coef
+end
+
 return Settings

@@ -41,8 +41,13 @@ function love.conf(t)
 
   t.window.title = product_config["PRODUCT_NAME"]
   t.window.icon = nil
-  t.window.width = 360
-  t.window.height = 480
+  if love.system and love.system.getOS() == "AuroraOS" then
+    t.window.width = 720
+    t.window.height = 960
+  else
+    t.window.width = 360
+    t.window.height = 480
+  end
   t.window.borderless = false
   t.window.resizable = false
   t.window.minwidth = 1
