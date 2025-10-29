@@ -22,6 +22,7 @@ local MathUtils = require("math_utils")
 local Game = require("game")
 local Music = require("music")
 local Input = require("input")
+local Buttons = require("buttons")
 
 local score
 local hiScore = 0
@@ -152,6 +153,28 @@ function love.load()
   if Settings.IS_DEBUG_ENABLED then
     OverlayStats = require("lib.overlayStats")
     OverlayStats.load()
+  end
+
+  if isMobile then
+    Buttons:createButton({
+      x = 10,
+      y = 100,
+      w = 100,
+      h = 100,
+      label = "ESC",
+      rectangle = false,
+      onRelease = function ()
+        if GameState.is("playing") then
+          GameState.isPaused = true
+        elseif GameState.is("levels") then
+          GameState.attractMode = true
+          Main.currentLevelData = nil
+          Main.initGame()
+          GameState.set("attract")
+          Parallax.resume()
+        end
+      end
+    })
   end
 end
 
@@ -797,6 +820,9 @@ function love.draw()
       About.draw()
     elseif GameState.is("levels") then
       LevelsSelector.draw()
+    end
+    if GameState.is("playing") or GameState.is("levels") then
+      Buttons:draw()
     end
   end
 

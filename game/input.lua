@@ -12,6 +12,7 @@ local About = require("about")
 local Help = require("help")
 local Game = require("game")
 local Parallax = require("parallax")
+local Buttons = require("buttons")
 
 local menuItems = {
   { text = "ENDLESS MODE", action = "start_endless" },
@@ -423,6 +424,12 @@ function Input:update(dt)
 end
 
 function Input:touchpressed(id, x, y, dx, dy, pressure)
+  if Buttons:touchpressed(id, x, y) then
+    return
+  end
+
+  self:mousepressed(x, y, 1)
+
   if GameState.isNot("gameOver") and not GameState.isPaused then
     activeTouches[id] = { x = x, y = y, time = love.timer.getTime() }
 
@@ -446,11 +453,19 @@ function Input:touchpressed(id, x, y, dx, dy, pressure)
 end
 
 function Input:touchmoved(id, x, y, dx, dy, pressure)
+  if Buttons:touchmoved(id, x, y, dx, dy, pressure) then
+    return
+  end
+
   -- Handle touch movement as mouse movement
   self:mousemove(x, y)
 end
 
 function Input:touchreleased(id, x, y, dx, dy, pressure)
+  if Buttons:touchreleased(id, x, y, pressure) then
+    return
+  end
+
   activeTouches[id] = nil
 
   if isTouchHolding then
