@@ -261,10 +261,18 @@ function love.wheelmoved(x, y)
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
+  if isMobile then
+    return
+  end
+
   Input:mousemove(x, y)
 end
 
 function love.mousepressed(x, y, button)
+  if isMobile then
+    return
+  end
+
   Input:mousepressed(x, y, button)
 end
 
