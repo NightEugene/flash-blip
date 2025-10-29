@@ -51,7 +51,7 @@ function Button:draw(self)
             love.graphics.circle("line", bx, by, b.w * 0.5 + value)
         end
 
-        local font = love.graphics.getFont()
+        local font = love.graphics.setNewFont(24)
         local txt = b.label
         local tw = font:getWidth(txt)
         local th = font:getHeight()
