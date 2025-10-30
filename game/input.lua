@@ -428,8 +428,6 @@ function Input:touchpressed(id, x, y, dx, dy, pressure)
     return
   end
 
-  self:mousepressed(x, y, 1)
-
   if GameState.isNot("gameOver") and not GameState.isPaused then
     activeTouches[id] = { x = x, y = y, time = love.timer.getTime() }
 
@@ -465,6 +463,8 @@ function Input:touchreleased(id, x, y, dx, dy, pressure)
   if Buttons:touchreleased(id, x, y, pressure) then
     return
   end
+
+  self:mousepressed(x, y, 1)
 
   activeTouches[id] = nil
 
