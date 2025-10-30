@@ -46,6 +46,8 @@ local activeTouches = {}
 local pingGestureThreshold = 0.15 -- Max time difference for simultaneous detection (150ms)
 local minSimultaneousTouches = 2
 
+local mouseLeftIsPressed = false
+
 function Input.getMenuItems()
   return menuItems
 end
@@ -304,6 +306,9 @@ function Input:mousepressed(x, y, button)
     if GameState.isNot("gameOver") and not GameState.isPaused then
       justPressed = true
     end
+    if GameState.is("gameOver") then
+      mouseLeftIsPressed = true
+    end
   end
 
   local playerCircle = Game.get_player_circle()
@@ -373,8 +378,17 @@ function Input:getConnectedJoysticks()
   return connectedJoysticks
 end
 
+local function getMouseLeftIsPressed()
+  if mouseLeftIsPressed then
+    mouseLeftIsPressed = false
+    return true
+  else
+    return false
+  end
+end
+
 local function isKeyboardOrMouseContinue()
-  return love.keyboard.isDown("space") or love.keyboard.isDown("return") or love.mouse.isDown(1)
+  return love.keyboard.isDown("space") or love.keyboard.isDown("return") or getMouseLeftIsPressed()
 end
 
 local function isControllerContinue()
