@@ -800,6 +800,9 @@ function love.draw()
   if GameState.is("gameOver") and not GameState.attractMode then
     if not gameOverLine or gameOverLine.timer <= 0 then
       Text.drawGameOver(displayHiScore, GameState.nuHiScore, GameState.hiScoreFlashVisible)
+      if GameState.gameOverInputDelay <= 0 then
+        Text.drawGameOverContinue(displayHiScore, GameState.nuHiScore, GameState.hiScoreFlashVisible)
+      end
     end
   end
 

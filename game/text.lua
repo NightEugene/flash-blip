@@ -71,7 +71,10 @@ function Text.drawGameOver(hiScore, nuHiScore, hiScoreFlashVisible)
 
   love.graphics.setColor(Colors.naranjaRojo)
   Text.drawCenteredText("GAME OVER", Settings.WINDOW_HEIGHT * 0.4, 11)
+  love.graphics.setColor(Colors.white)
+end
 
+function Text.drawGameOverContinue()
   love.graphics.setColor(Colors.white)
   Text.drawCenteredText("PRESS SPACE OR CLICK", Settings.WINDOW_HEIGHT * 0.55, 5)
   Text.drawCenteredText("TO RESTART", Settings.WINDOW_HEIGHT * 0.60, 5)
