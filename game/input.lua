@@ -456,7 +456,7 @@ function Input:touchmoved(id, x, y, dx, dy, pressure)
   end
 
   -- Handle touch movement as mouse movement
-  self:mousemove(x, y)
+  --self:mousemove(x, y)
 end
 
 function Input:touchreleased(id, x, y, dx, dy, pressure)
