@@ -76,7 +76,11 @@ end
 
 function Text.drawGameOverContinue()
   love.graphics.setColor(Colors.white)
-  Text.drawCenteredText("PRESS SPACE OR CLICK", Settings.WINDOW_HEIGHT * 0.55, 5)
+  if Main.isMobile() then
+    Text.drawCenteredText("TAP THE SCREEN", Settings.WINDOW_HEIGHT * 0.55, 5)
+  else
+    Text.drawCenteredText("PRESS SPACE OR CLICK", Settings.WINDOW_HEIGHT * 0.55, 5)
+  end
   Text.drawCenteredText("TO RESTART", Settings.WINDOW_HEIGHT * 0.60, 5)
 end
 
@@ -89,7 +93,11 @@ end
 
 local function drawContinuePrompt()
   love.graphics.setColor(Colors.white)
-  Text.drawCenteredText("PRESS SPACE OR CLICK", Settings.WINDOW_HEIGHT * 0.70, 5)
+  if Main.isMobile() then
+    Text.drawCenteredText("TAP THE SCREEN", Settings.WINDOW_HEIGHT * 0.70, 5)
+  else
+    Text.drawCenteredText("PRESS SPACE OR CLICK", Settings.WINDOW_HEIGHT * 0.70, 5)
+  end
   Text.drawCenteredText("TO CONTINUE", Settings.WINDOW_HEIGHT * 0.75, 5)
 end
 

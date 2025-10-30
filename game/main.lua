@@ -865,3 +865,7 @@ end
 function Main.set_game_state(state)
   GameState.set(state)
 end
+
+function Main.isMobile()
+  return isMobile
+end

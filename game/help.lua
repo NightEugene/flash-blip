@@ -14,11 +14,17 @@ local function drawHelpScreenStatic()
   love.graphics.setColor(Colors.cyan)
   Text.drawCenteredText("HOW TO PLAY", Settings.WINDOW_HEIGHT * 0.03, 9)
 
-  love.graphics.setColor(Colors.spiced_amber)
-  Text.drawCenteredText("UP/DOWN TO SCROLL", Settings.WINDOW_HEIGHT * 0.12, 2)
+  if not Main.isMobile then
+    love.graphics.setColor(Colors.spiced_amber)
+    Text.drawCenteredText("UP/DOWN TO SCROLL", Settings.WINDOW_HEIGHT * 0.12, 2)
+  end
 
   love.graphics.setColor(Colors.white)
-  Text.drawCenteredText("PRESS ESC TO RETURN", Settings.WINDOW_HEIGHT * 0.95, 3)
+  if Main.isMobile() then
+    Text.drawCenteredText("TAP THE SCREEN TO RETURN", Settings.WINDOW_HEIGHT * 0.95, 3)
+  else
+    Text.drawCenteredText("PRESS ESC TO RETURN", Settings.WINDOW_HEIGHT * 0.95, 3)
+  end
 end
 
 local function drawHelpScreenScrollable(scrollY)
@@ -28,13 +34,21 @@ local function drawHelpScreenScrollable(scrollY)
   local yPos = Settings.WINDOW_HEIGHT * 0.18 - scrollY
 
   love.graphics.setColor(Colors.white)
-  Text.drawText("LEFT CLICK OR SPACE:", leftMargin, yPos, 3)
+  if Main.isMobile() then
+    Text.drawText("SHORT TAP:", leftMargin, yPos, 3)
+  else
+    Text.drawText("LEFT CLICK OR SPACE:", leftMargin, yPos, 3)
+  end
   yPos = yPos + 40
   Text.drawText("MOVES PLAYER TO THE NEXT POINT", leftMargin + 20, yPos, 3)
   yPos = yPos + 60
 
   love.graphics.setColor(Colors.white)
-  Text.drawText("RIGHT CLICK OR C:", leftMargin, yPos, 3)
+  if Main.isMobile() then
+    Text.drawText("LONG TAP:", leftMargin, yPos, 3)
+  else
+    Text.drawText("RIGHT CLICK OR C:", leftMargin, yPos, 3)
+  end
   yPos = yPos + 40
   Text.drawText("PINGS TO COLLECT POWERUPS NEARBY", leftMargin + 18, yPos, 3)
   yPos = yPos + 80
@@ -59,7 +73,11 @@ local function drawHelpScreenScrollable(scrollY)
   Powerups.drawPhaseShift(leftMargin + 20, yPos + 10, 24, 0, 6)
   Text.drawText("PHASE SHIFT POWERUP:", leftMargin + 70, yPos - 4, 3)
   yPos = yPos + 40
-  Text.drawText("RIGHT CLICK PING TELEPORTS", leftMargin + 30, yPos, 3)
+  if Main.isMobile() then
+    Text.drawText("LONG TAP PING TELEPORTS", leftMargin + 30, yPos, 3)
+  else
+    Text.drawText("RIGHT CLICK PING TELEPORTS", leftMargin + 30, yPos, 3)
+  end
   yPos = yPos + 30
   Text.drawText("TO NEXT POINT. LASTS 10 SECONDS.", leftMargin + 30, yPos, 3)
   yPos = yPos + 60
