@@ -835,9 +835,6 @@ function love.draw()
     elseif GameState.is("levels") then
       LevelsSelector.draw()
     end
-    if GameState.is("playing") or GameState.is("levels") then
-      Buttons:draw()
-    end
   end
 
   if not effectsOn then
@@ -845,6 +842,10 @@ function love.draw()
   else
     -- Draw canvas to screen applying shader effects
     effects(drawGameAndUI)
+  end
+
+  if GameState.is("playing") or GameState.is("levels") then
+    Buttons:draw()
   end
 
   if Settings.IS_DEBUG_ENABLED then
