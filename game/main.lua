@@ -43,6 +43,7 @@ local effects
 -- Platform detection: check once at module level
 local isMobile = love.system.getOS() == "Android" or love.system.getOS() == "iOS" or
                  love.system.getOS() == "AuroraOS"
+local effectsOn = love.system.getOS() ~= "AuroraOS"
 
 local function initGame()
   score = 0
@@ -128,19 +129,21 @@ function love.load()
 
   gameCanvas = love.graphics.newCanvas(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT)
 
-  if not isMobile then
-    effects = Moonshine(Moonshine.effects.glow)
-      .chain(Moonshine.effects.gaussianblur)
-      .chain(Moonshine.effects.scanlines)
-      .chain(Moonshine.effects.crt)
+  effects = Moonshine(Moonshine.effects.glow)
+    .chain(Moonshine.effects.gaussianblur)
+    .chain(Moonshine.effects.scanlines)
+    .chain(Moonshine.effects.crt)
 
+  if not isMobile then
     effects.glow.strength = 20
-    effects.glow.min_luma = 0.1
-    effects.gaussianblur.sigma = 1
-    effects.scanlines.width = 4
-    effects.scanlines.opacity = 0.2
-    effects.scanlines.color = Colors.light_blue
+  else
+    effects.glow.strength = 1
   end
+  effects.glow.min_luma = 0.1
+  effects.gaussianblur.sigma = 1
+  effects.scanlines.width = 4
+  effects.scanlines.opacity = 0.2
+  effects.scanlines.color = Colors.light_blue
 
   initGame()
   Parallax.load(nil, nil)
@@ -837,7 +840,7 @@ function love.draw()
     end
   end
 
-  if isMobile then
+  if not effectsOn then
     drawGameAndUI()
   else
     -- Draw canvas to screen applying shader effects
@@ -868,4 +871,8 @@ end
 
 function Main.isMobile()
   return isMobile
+end
+
+function Main.changeGraphics()
+  effectsOn = not effectsOn
 end

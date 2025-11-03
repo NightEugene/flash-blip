@@ -20,6 +20,9 @@ local menuItems = {
   { text = "ABOUT", action = "show_about" },
   { text = "HELP", action = "show_help" },
 }
+if love.system.getOS() == "AuroraOS" then
+  table.insert(menuItems, { text = "EFFECTS", action = "change_graphics" })
+end
 if love.system.getOS() ~= "Web" and love.system.getOS() ~= "AuroraOS" then
   table.insert(menuItems, { text = "EXIT", action = "exit_game" })
 end
@@ -261,6 +264,8 @@ function Input:mousepressed(x, y, button)
             GameState.isPaused = true
           end
           GameState.set("help")
+        elseif action == "change_graphics" then
+          Main.changeGraphics()
         elseif action == "exit_game" then
           love.event.quit()
         end
