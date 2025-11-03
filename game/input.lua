@@ -478,7 +478,9 @@ function Input:touchreleased(id, x, y, dx, dy, pressure)
     return
   end
 
-  self:mousepressed(x, y, 1)
+  if touchHoldTimer < touchHoldThreshold then
+    self:mousepressed(x, y, 1)
+  end
 
   activeTouches[id] = nil
 
