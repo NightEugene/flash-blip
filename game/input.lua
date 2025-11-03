@@ -20,7 +20,7 @@ local menuItems = {
   { text = "ABOUT", action = "show_about" },
   { text = "HELP", action = "show_help" },
 }
-if love.system.getOS() ~= "Web" then
+if love.system.getOS() ~= "Web" and love.system.getOS() ~= "AuroraOS" then
   table.insert(menuItems, { text = "EXIT", action = "exit_game" })
 end
 
