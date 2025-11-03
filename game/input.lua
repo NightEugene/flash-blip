@@ -306,7 +306,7 @@ function Input:mousepressed(x, y, button)
     if GameState.isNot("gameOver") and not GameState.isPaused then
       justPressed = true
     end
-    if GameState.is("gameOver") then
+    if GameState.is("gameOver") or GameState.is("levelCompleted") then
       mouseLeftIsPressed = true
     end
   end
